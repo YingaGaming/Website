@@ -15,4 +15,30 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 -->
 
-<h1>Hello there!</h1>
+<div id="background"></div>
+
+<div id="content">
+    <h1>Hello there!</h1>
+</div>
+
+<style>
+
+    #background {
+        background-color: black;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -100;
+    }
+
+    #content {
+        color: white;
+    }
+
+    h1 {
+        font-family: 'Fredoka One', cursive;
+    }
+
+</style>
