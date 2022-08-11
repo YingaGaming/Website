@@ -1,0 +1,20 @@
+.nav-item:hover {
+    cursor: pointer;
+}
+
+.shopsection {
+    margin-top: 2rem;
+}
+
+.shopsection h3 {
+    font-family: 'Open Sans', sans-serif;
+    color: cyan;
+}
+
+.donateExplain {
+    display: none;
+}
+
+#donate .btn-danger {
+    cursor:not-allowed;
+}
