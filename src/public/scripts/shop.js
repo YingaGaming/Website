@@ -1,25 +1,16 @@
 let explains = {
     0: 'Leider kannst du nicht weniger als 5€ spenden',
     5: 'Die Mindestspende. Ein Bierchen für Xenorio.',
-    6: {
-        text: 'Das sind %x% Center Shocks!',
-        algorithm: (val) => {
-            return val / 0.05
-        }
+    6: (val) => {
+        return `Das sind ${val/0.05} Center Shocks!`
     },
     45: 'Ein Monat Serverkosten',
-    46: {
-        text: 'Davon werden mindestens %x%€ reinvestiert',
-        algorithm: (val) => {
-            return (val - 45) / 2
-        }
+    46: (val) => {
+        return `Davon werden ${(val - 45) / 2}€ - ${val/2}€ reinvestiert`
     },
     69: 'Nice.',
-    70: {
-        text: 'Davon werden mindestens %x%€ reinvestiert',
-        algorithm: (val) => {
-            return (val - 45) / 2
-        }
+    70: (val) => {
+        return `Davon werden ${(val - 45) / 2}€ - ${val/2}€ reinvestiert`
     },
     100: 'Ernsthaft? Wow!',
     101: 'Du kannst höchstens 100€ auf einmal spenden'
@@ -40,8 +31,8 @@ function updateExplain(value) {
     let parseOut = (ex, val) => {
         if (typeof ex === 'string') {
             return ex
-        } else if (typeof ex === 'object') {
-            return ex.text.replaceAll('%x%', ex.algorithm(val))
+        } else if (typeof ex === 'function') {
+            return ex(val)
         }
     }
 
