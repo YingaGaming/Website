@@ -66,9 +66,9 @@ app.post('/order', (req, res) => {
 
 })
 
-app.post('/webhook', (req, res) => {
+app.post('/webhook', async (req, res) => {
     console.log('new payment')
-    let payment = mollie.payments.get(req.body.id)
+    let payment = await mollie.payments.get(req.body.id)
 
     if (!payment || payment.status != 'paid') return res.send('success')
 
