@@ -25,7 +25,8 @@ module.exports = {
 
     // Minecraft RCON data
     rcon: {
-        address: '127.0.0.1:25575',
+        host: '127.0.0.1',
+        port: 25575,
         password: 'verysecure'
     },
 
