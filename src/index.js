@@ -81,7 +81,7 @@ app.post('/webhook', async (req, res) => {
 
             console.log('order found')
 
-            if (!fs.existsSync(`./actions/${order.product}.js`)) return res.send('success')
+            if (!fs.existsSync(__dirname + `/actions/${order.product}.js`)) return res.send('success')
 
             console.log('running action')
 
