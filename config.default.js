@@ -6,6 +6,9 @@ module.exports = {
     // Network port to listen on
     port: 3000,
 
+    // Discord webhook for logging purchases
+    log_webhook: 'URL_HERE',
+
     // MongoDB Database
     database: {
         url: 'mongodb://localhost:27017/',

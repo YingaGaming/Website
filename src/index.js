@@ -1,6 +1,7 @@
 const express = require('express')
 const { createMollieClient } = require('@mollie/api-client');
 const fs = require('fs')
+const fetch = require('cross-fetch')
 const config = require('../config')
 const products = require('./products')
 const mongo = require('./util/mongo')
@@ -80,9 +81,40 @@ app.post('/webhook', async(req, res) => {
             if (!orders[0]) return res.send('success')
             let order = orders[0]
 
-            mongo.update('Orders', {id: payment.id}, {paid: true})
+            mongo.update('Orders', { id: payment.id }, { paid: true })
 
             if (order.processed) return res.send('success')
+
+            fetch(config.log_webhook, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    embeds: [{
+                        title: "Bestellung Bezahlt",
+                        description: payment.description,
+                        color: 65280,
+                        fields: [
+                            {
+                                name: 'Benutzer',
+                                value: `${order.username}`
+                            },
+                            {
+                                name: 'Preis',
+                                value: `${payment.amount.value} ${payment.amount.currency}`
+                            },
+                            {
+                                name: 'Methode',
+                                value: payment.method
+                            }
+                        ],
+                        footer: {
+                            text: id
+                        }
+                    }]
+                })
+            })
 
             if (!fs.existsSync(__dirname + `/actions/${order.product}.js`)) return res.send('success')
 
