@@ -69,15 +69,23 @@ document.getElementById('donateInput').addEventListener('input', e => {
 
 })
 
+function showError(message) {
+    document.getElementById('errorModalBody').innerHTML = message
+
+    $('#errorModal').modal('show')
+}
+
 function order(product, price) {
     let agbButton = document.getElementById('agb-checkbox')
     let usernameField = document.getElementById('username')
 
     if (!agbButton.checked) {
+        showError('Bitte akzeptiere die AGB')
         return
     }
 
     if (!usernameField.value) {
+        showError('Bitte gib deinen Benutzernamen ein')
         return
     }
 
@@ -95,9 +103,9 @@ function order(product, price) {
             case 200:
                 window.location.href = response.url
                 break;
-        
+
             default:
-                console.log(xhr.responseText)
+                showError(response.error)
                 break;
         }
     };
