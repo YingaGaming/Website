@@ -22,12 +22,16 @@ app.use(cors())
 app.post('/order', (req, res) => {
 
     if (!req.body.product || !req.body.price || !req.body.username) {
-        res.status(400).json('Missing Data')
+        res.status(400).json({
+            error: 'Missing Data'
+        })
         return
     }
 
     if (!products[req.body.product]) {
-        res.status(404).json('Unknown Product')
+        res.status(404).json({
+            error: 'Unknown Product'
+        })
         return
     }
 
@@ -35,7 +39,9 @@ app.post('/order', (req, res) => {
     let price = parseFloat(req.body.price)
     let username = req.body.username
 
-    if (isNaN(price)) return res.status(400).json('Invalid Price')
+    if (isNaN(price)) return res.status(400).json({
+        error: 'Invalid Price'
+    })
 
     product.check(price, username)
         .then(() => {
@@ -59,17 +65,23 @@ app.post('/order', (req, res) => {
                     paid: false,
                     processed: false
                 }).then(() => {
-                    res.json(payment.getCheckoutUrl())
+                    res.json({
+                        url: payment.getCheckoutUrl()
+                    })
                 }).catch(err => {
                     console.error(err)
-                    res.status(500).json('Unknown Error')
+                    res.status(500).json({
+                        error: 'Unknown Error'
+                    })
                 })
             })
 
         })
         .catch(err => {
             console.error(err)
-            res.status(500).json(err)
+            res.status(500).json({
+                error: err
+            })
         })
 
 })
@@ -98,8 +110,7 @@ app.post('/webhook', async(req, res) => {
                         title: "Bestellung Bezahlt",
                         description: payment.description,
                         color: 65280,
-                        fields: [
-                            {
+                        fields: [{
                                 name: 'Benutzer',
                                 value: `${order.username}`
                             },

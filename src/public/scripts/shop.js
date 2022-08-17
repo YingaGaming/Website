@@ -87,7 +87,20 @@ function order(product, price) {
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
 
-    xhr.onload = () => console.log(xhr.responseText);
+    xhr.onload = () => {
+
+        let response = JSON.parse(xhr.responseText)
+
+        switch (xhr.status) {
+            case 200:
+                window.location.href = response.url
+                break;
+        
+            default:
+                console.log(xhr.responseText)
+                break;
+        }
+    };
 
     xhr.send(JSON.stringify({
         product: product,
