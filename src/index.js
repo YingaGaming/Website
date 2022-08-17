@@ -55,7 +55,7 @@ app.post('/order', (req, res) => {
                     username: username.toLowerCase(),
                     created: Date.now(),
                     paid: false,
-                    processed: true
+                    processed: false
                 }).then(() => {
                     res.json(payment.getCheckoutUrl())
                 }).catch(err => {
@@ -115,8 +115,6 @@ app.post('/webhook', async(req, res) => {
                         }
                     }]
                 })
-            }).then(async response => {
-                console.log(await response.json())
             })
 
             if (!fs.existsSync(__dirname + `/actions/${order.product}.js`)) return res.send('success')
