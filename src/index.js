@@ -10,6 +10,7 @@ const mollie = createMollieClient({ apiKey: config.keys.mollie });
 const app = express()
 
 app.use(express.json())
+app.use(express.urlencoded())
 
 app.post('/order', (req, res) => {
 
