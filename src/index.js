@@ -10,7 +10,7 @@ const mollie = createMollieClient({ apiKey: config.keys.mollie });
 const app = express()
 
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 app.post('/order', (req, res) => {
 
@@ -66,7 +66,7 @@ app.post('/order', (req, res) => {
 
 })
 
-app.post('/webhook', async (req, res) => {
+app.post('/webhook', async(req, res) => {
     console.log('new payment')
     let payment = await mollie.payments.get(req.body.id)
 
@@ -80,7 +80,7 @@ app.post('/webhook', async (req, res) => {
             let order = orders[0]
 
             console.log('order found')
-
+            console.log(__dirname + `/actions/${order.product}.js`)
             if (!fs.existsSync(__dirname + `/actions/${order.product}.js`)) return res.send('success')
 
             console.log('running action')
