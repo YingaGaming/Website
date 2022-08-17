@@ -67,17 +67,23 @@ app.post('/order', (req, res) => {
 })
 
 app.post('/webhook', (req, res) => {
-    console.log(`ID: ${req.body.id}`)
+    console.log('new payment')
     let payment = mollie.payments.get(req.body.id)
 
     if (!payment || payment.status != 'paid') return res.send('success')
+
+    console.log('payment paid')
 
     mongo.query('Orders', { id: payment.id })
         .then(orders => {
             if (!orders[0]) return res.send('success')
             let order = orders[0]
 
+            console.log('order found')
+
             if (!fs.existsSync(`./actions/${order.product}.js`)) return res.send('success')
+
+            console.log('running action')
 
             require(`./actions/${order.product}.js`).run(order)
         })
