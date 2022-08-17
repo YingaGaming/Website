@@ -23,6 +23,12 @@ module.exports = {
 
     },
 
+    // Minecraft RCON data
+    rcon: {
+        address: '127.0.0.1:25575',
+        password: 'verysecure'
+    },
+
     // API keys
     keys: {
         mollie: 'MOLLIE_KEY_HERE'

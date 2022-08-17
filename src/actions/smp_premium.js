@@ -1,3 +1,5 @@
+const rcon = require('../util/rcon')
+
 module.exports.run = (order) => {
-    console.log(`${order.product} - ${order.username} - paid`)
+    rcon.executeCommand(`lp user ${order.username} parent add premium`)
 }
