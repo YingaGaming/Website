@@ -32,7 +32,7 @@ module.exports = {
                 } else if (price < 5) {
                     reject('Minimal 5€')
                 } else {
-                    resolve
+                    resolve()
                 }
 
             })
