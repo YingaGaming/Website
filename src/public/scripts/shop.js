@@ -68,3 +68,31 @@ document.getElementById('donateInput').addEventListener('input', e => {
     updateExplain(inputValue)
 
 })
+
+function order(product, price) {
+    let agbButton = document.getElementById('agb-checkbox')
+    let usernameField = document.getElementById('username')
+
+    if (!agbButton.checked) {
+        return
+    }
+
+    if (!usernameField.value) {
+        return
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://api.yinga.games/order");
+
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onload = () => console.log(xhr.responseText);
+
+    xhr.send(JSON.stringify({
+        product: product,
+        price: price,
+        username: usernameField.value
+    }));
+
+}

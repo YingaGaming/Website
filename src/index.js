@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const { createMollieClient } = require('@mollie/api-client');
 const fs = require('fs')
 const fetch = require('cross-fetch')
@@ -16,6 +17,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cors())
 
 app.post('/order', (req, res) => {
 

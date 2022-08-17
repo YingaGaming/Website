@@ -46,6 +46,17 @@
                 </li>
             </ul>
 
+            <br>
+
+            <input class="form-check-input" type="checkbox" value="" id="agb-checkbox">
+            <label class="form-check-label" for="agb-checkbox">
+                Ich habe die <a href="/agb" target="_blank">AGB</a> gelesen, verstanden, und akzeptiere sie
+            </label>
+
+            <br><br>
+
+            <input type="text" placeholder="Benutzername" id="username">
+
             <div class="tab-content">
 
                 <!-- Donations -->
@@ -58,7 +69,7 @@
                     <input type="range" class="form-range" id="donateRange" step="5" min="5" value="5">
                     <input type="number" value="5" id="donateInput"><i class="fa-solid fa-euro-sign"></i>
                     <br><br>
-                    <button class="btn btn-warning" id="donateSubmit" onclick="alert('Hier wird noch gewerkelt!')"><i class="fa-solid fa-gift"></i> Spenden</button>
+                    <button class="btn btn-warning" id="donateSubmit" onclick="order('donation', document.getElementById('donateInput').value)"><i class="fa-solid fa-gift"></i> Spenden</button>
                     <br><br>
                     <div id="donateExplain">
                         
