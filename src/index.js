@@ -4,6 +4,9 @@ const fs = require('fs')
 const config = require('../config')
 const products = require('./products')
 const mongo = require('./util/mongo')
+const rcon = require('./util/rcon')
+
+rcon.connect()
 
 const mollie = createMollieClient({ apiKey: config.keys.mollie });
 
