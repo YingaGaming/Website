@@ -10,16 +10,14 @@ module.exports = {
                     reject('Falscher Preis')
                     return
                 }
-
-                mongo.query('Orders', { product: 'smp_premium', username: username.toLowerCase(), paid: true }, orders => {
-                    if (orders[0]) {
-                        reject('Du besitzt bereits Premium')
-                        return
-                    }
-
-                    resolve()
-
-                })
+                mongo.query('Orders', { product: 'smp_premium', username: username.toLowerCase(), paid: true })
+                    .then(orders => {
+                        if (orders[0]) {
+                            reject('Du besitzt bereits Premium')
+                            return
+                        }
+                        resolve()
+                    })
 
             })
         }

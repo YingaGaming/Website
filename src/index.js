@@ -49,9 +49,12 @@ app.post('/order', (req, res) => {
                     username: username.toLowerCase(),
                     created: Date.now(),
                     paid: false
+                }).then(() => {
+                    res.json(payment.getCheckoutUrl())
+                }).catch(err => {
+                    console.error(err)
+                    res.status(500).json('Unknown Error')
                 })
-
-                res.json(payment.getCheckoutUrl())
             })
 
         })
@@ -63,19 +66,24 @@ app.post('/order', (req, res) => {
 })
 
 app.post('/webhook', (req, res) => {
+    console.log(`ID: ${req.body.id}`)
     let payment = mollie.payments.get(req.body.id)
 
     if (!payment || payment.status != 'paid') return res.send('success')
 
-    mongo.query('Orders', { id: payment.id }, orders => {
-        if (!orders[0]) return res.send('success')
-        let order = orders[0]
+    mongo.query('Orders', { id: payment.id })
+        .then(orders => {
+            if (!orders[0]) return res.send('success')
+            let order = orders[0]
 
-        if (!fs.existsSync(`./actions/${order.product}.js`)) return res.send('success')
+            if (!fs.existsSync(`./actions/${order.product}.js`)) return res.send('success')
 
-        require(`./actions/${order.product}.js`).run(order)
-
-    })
+            require(`./actions/${order.product}.js`).run(order)
+        })
+        .catch(err => {
+            console.error(err)
+            res.status(500).json(err)
+        })
 
 })
 
