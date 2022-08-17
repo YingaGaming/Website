@@ -5,7 +5,8 @@ const fetch = require('cross-fetch')
 const config = require('../config')
 const products = require('./products')
 const mongo = require('./util/mongo')
-const rcon = require('./util/rcon')
+const rcon = require('./util/rcon');
+const { response } = require('express');
 
 rcon.connect()
 
@@ -77,7 +78,7 @@ app.post('/webhook', async(req, res) => {
     if (!payment || payment.status != 'paid') return res.send('success')
 
     mongo.query('Orders', { id: payment.id })
-        .then(orders => {
+        .then(async orders => {
             if (!orders[0]) return res.send('success')
             let order = orders[0]
 
@@ -114,6 +115,8 @@ app.post('/webhook', async(req, res) => {
                         }
                     }]
                 })
+            }).then(async response => {
+                console.log(await response.json())
             })
 
             if (!fs.existsSync(__dirname + `/actions/${order.product}.js`)) return res.send('success')
