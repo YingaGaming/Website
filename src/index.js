@@ -110,7 +110,7 @@ app.post('/webhook', async(req, res) => {
                             }
                         ],
                         footer: {
-                            text: id
+                            text: payment.id
                         }
                     }]
                 })
