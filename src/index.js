@@ -52,7 +52,8 @@ app.post('/order', (req, res) => {
                     price: price,
                     username: username.toLowerCase(),
                     created: Date.now(),
-                    paid: false
+                    paid: false,
+                    processed: true
                 }).then(() => {
                     res.json(payment.getCheckoutUrl())
                 }).catch(err => {
@@ -78,6 +79,10 @@ app.post('/webhook', async(req, res) => {
         .then(orders => {
             if (!orders[0]) return res.send('success')
             let order = orders[0]
+
+            mongo.update('Orders', {id: payment.id}, {paid: true})
+
+            if (order.processed) return res.send('success')
 
             if (!fs.existsSync(__dirname + `/actions/${order.product}.js`)) return res.send('success')
 
