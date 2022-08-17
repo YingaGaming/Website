@@ -45,7 +45,7 @@ app.post('/order', (req, res) => {
 
                 mongo.insert('Orders', {
                     id: payment.id,
-                    product: product,
+                    product: req.body.product,
                     price: price,
                     username: username.toLowerCase(),
                     created: Date.now(),
