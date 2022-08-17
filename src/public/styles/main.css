@@ -61,6 +61,13 @@ canvas {
     font-family: 'Open Sans', sans-serif;
 }
 
+#home-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+}
+
 @media screen and (max-width: 480px) {
   .textbox {
     width: 100%;
