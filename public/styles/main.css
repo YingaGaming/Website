@@ -1,12 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Press+Start+2P&display=swap");
 
-html,body {
-    background-color: rgb(41, 41, 41);
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    color: white;
+html,
+body {
+  background-color: rgb(41, 41, 41);
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  color: white;
 }
 
 .header {
@@ -16,26 +17,26 @@ html,body {
 }
 
 .header a {
-    text-decoration: none;
-    margin-left: 1rem;
+  text-decoration: none;
+  margin-left: 1rem;
 }
 
 .header img {
-    max-width: 95vw;
+  max-width: 95vw;
 }
 
 canvas {
-    display:block;
-    background: rgb(33,36,50);
-    position: fixed;
-    z-index: 0;
+  display: block;
+  background: rgb(33, 36, 50);
+  position: fixed;
+  z-index: 0;
 }
 
 #content {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
 .textbox {
@@ -48,17 +49,17 @@ canvas {
 }
 
 .textbox h1 {
-    font-family: 'Press Start 2P', cursive;
-    color: yellow;
-    margin-bottom: 1rem;
+  font-family: "Press Start 2P", cursive;
+  color: yellow;
+  margin-bottom: 1rem;
 }
 
 .textbox h2 {
-    color: cyan;
+  color: cyan;
 }
 
 .textbox h3 {
-    font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 #home-button {
@@ -66,6 +67,23 @@ canvas {
   top: 1rem;
   left: 1rem;
   z-index: 100;
+}
+
+#scrollArrow {
+  position: relative;
+  bottom: 5rem;
+  animation: scrollArrowAnimation 1s linear infinite; 
+  font-size: 2rem;
+}
+
+@keyframes scrollArrowAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
 }
 
 @media screen and (max-width: 480px) {
