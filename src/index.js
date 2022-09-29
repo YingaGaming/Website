@@ -51,7 +51,7 @@ app.post('/order', (req, res) => {
                     value: price.toFixed(2),
                     currency: 'EUR'
                 },
-                description: product.name,
+                description: product.name + ' | ' + username,
                 redirectUrl: config.redirect.success,
                 webhookUrl: config.url + '/webhook'
             }).then(payment => {
