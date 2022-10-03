@@ -4,7 +4,7 @@ let explains = {
     6: (val) => {
         return `Das sind ${val/0.05} Center Shocks!`
     },
-    45: 'Ein Monat Serverkosten',
+    45: 'Ein Monat Serverkosten!',
     46: (val) => {
         return `Davon werden ${(val - 45) / 2}€ - ${val/2}€ reinvestiert`
     },
@@ -13,7 +13,9 @@ let explains = {
         return `Davon werden ${(val - 45) / 2}€ - ${val/2}€ reinvestiert`
     },
     100: 'Ernsthaft? Wow!',
-    101: 'Du kannst höchstens 100€ auf einmal spenden'
+    101: 'Du kannst höchstens 100€ auf einmal spenden',
+    420: 'Blaze it!',
+    421: 'Du kannst höchstens 100€ auf einmal spenden'
 }
 
 function updateExplain(value) {
