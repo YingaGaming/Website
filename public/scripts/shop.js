@@ -1,6 +1,5 @@
 let explains = {
     0: 'Leider kannst du nicht weniger als 5€ spenden',
-    5: 'Die Mindestspende. Ein Bierchen für Xenorio.',
     6: (val) => {
         return `Das sind ${val/0.05} Center Shocks!`
     },
